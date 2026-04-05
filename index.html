@@ -1,312 +1,86 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#0f172a" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Cable Select" />
-    <title>DEWA Cable & Protection Selector</title>
-    <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="apple-touch-icon" href="./assets/icon-192.png" />
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
-    <div class="app-shell">
-      <header class="topbar glass">
-        <div>
-          <p class="eyebrow">jit8jit-arch</p>
-          <h1>DEWA Cable & Protection Selector</h1>
-          <p class="subtle">Mobile-first GitHub Pages web app for cable, ECC, glands, lugs, isolator and breaker selection.</p>
-        </div>
-        <div class="topbar-actions">
-          <label class="stack compact">
-            <span>Standard profile</span>
-            <select id="profileSelect"></select>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Electrical Cable Selector</title>
+  <meta name="theme-color" content="#0f172a">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon-192.png">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div>
+        <h1>Electrical Cable Selector</h1>
+        <p>Simple mobile tool for load, distance, cable, breaker, isolator, glands, and lugs.</p>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <div class="section-title">Quick Input</div>
+
+        <label>Selection Profile
+          <select id="profileSelect"></select>
+        </label>
+
+        <label>Equipment Name
+          <input id="equipmentName" type="text" placeholder="Example: Pool Pump 1">
+        </label>
+
+        <div class="grid two">
+          <label>Load (A)
+            <input id="loadCurrent" type="number" min="0" step="0.1" placeholder="Example: 32">
           </label>
-          <button id="openProfileManager" class="btn btn-secondary" type="button">Profiles</button>
-        </div>
-      </header>
-
-      <main class="layout">
-        <section class="hero grid-two">
-          <article class="card hero-card">
-            <div class="section-header">
-              <div>
-                <p class="eyebrow">Equipment entry</p>
-                <h2>Add equipment one by one</h2>
-              </div>
-              <span class="pill">iPhone ready</span>
-            </div>
-
-            <form id="equipmentForm" class="form-grid">
-              <label class="stack">
-                <span>Equipment name</span>
-                <input id="equipmentName" name="equipmentName" type="text" placeholder="e.g. Filter Pump Duty" required />
-              </label>
-
-              <label class="stack">
-                <span>Area / Location</span>
-                <input id="area" name="area" type="text" placeholder="e.g. Pump Room" />
-              </label>
-
-              <label class="stack">
-                <span>Quantity</span>
-                <input id="quantity" name="quantity" type="number" min="1" step="1" value="1" />
-              </label>
-
-              <label class="stack">
-                <span>Load input</span>
-                <select id="loadMode" name="loadMode">
-                  <option value="kw">kW</option>
-                  <option value="amp">Amps</option>
-                </select>
-              </label>
-
-              <label class="stack">
-                <span>Load value</span>
-                <input id="loadValue" name="loadValue" type="number" min="0" step="0.01" placeholder="e.g. 7.5" required />
-              </label>
-
-              <label class="stack">
-                <span>Phase</span>
-                <select id="phaseType" name="phaseType">
-                  <option value="1P">1 Phase</option>
-                  <option value="3P" selected>3 Phase</option>
-                </select>
-              </label>
-
-              <label class="stack">
-                <span>Neutral required</span>
-                <select id="neutralRequired" name="neutralRequired">
-                  <option value="yes" selected>Yes</option>
-                  <option value="no">No</option>
-                </select>
-              </label>
-
-              <label class="stack">
-                <span>Single-phase leg</span>
-                <select id="singlePhaseLeg" name="singlePhaseLeg">
-                  <option value="AUTO" selected>Auto balance</option>
-                  <option value="R">R</option>
-                  <option value="Y">Y</option>
-                  <option value="B">B</option>
-                </select>
-              </label>
-
-              <label class="stack">
-                <span>Power factor</span>
-                <input id="powerFactor" name="powerFactor" type="number" min="0.1" max="1" step="0.01" value="0.85" />
-              </label>
-
-              <label class="stack">
-                <span>Distance (m)</span>
-                <input id="distance" name="distance" type="number" min="0" step="1" value="20" />
-              </label>
-
-              <label class="stack">
-                <span>Voltage (V)</span>
-                <input id="voltage" name="voltage" type="number" min="1" step="1" value="400" />
-              </label>
-
-              <label class="stack">
-                <span>Cable standard</span>
-                <select id="cableStandard" name="cableStandard"></select>
-              </label>
-
-              <label class="stack">
-                <span>Use ELCB / RCCB</span>
-                <select id="useElcb" name="useElcb">
-                  <option value="yes" selected>Yes</option>
-                  <option value="no">No</option>
-                </select>
-              </label>
-
-              <label class="stack">
-                <span>ELCB sensitivity</span>
-                <select id="elcbSensitivity" name="elcbSensitivity"></select>
-              </label>
-
-              <label class="stack">
-                <span>Demand / spare factor</span>
-                <input id="demandFactor" name="demandFactor" type="number" min="0.1" step="0.01" value="1" />
-              </label>
-
-              <label class="stack full-width">
-                <span>Notes</span>
-                <textarea id="notes" name="notes" rows="2" placeholder="Optional installation note"></textarea>
-              </label>
-
-              <div class="form-actions full-width">
-                <button class="btn btn-primary" type="submit" id="submitButton">Add to schedule</button>
-                <button class="btn btn-secondary" type="button" id="resetFormButton">Reset form</button>
-                <button class="btn btn-ghost" type="button" id="loadDemoButton">Load demo item</button>
-              </div>
-            </form>
-          </article>
-
-          <article class="card quick-result">
-            <div class="section-header">
-              <div>
-                <p class="eyebrow">Live preview</p>
-                <h2>Current selection</h2>
-              </div>
-            </div>
-            <div id="livePreview" class="preview-stack"></div>
-          </article>
-        </section>
-
-        <section class="grid-three summary-grid">
-          <article class="card stat-card">
-            <p class="eyebrow">R phase</p>
-            <h3 id="rPhaseTotal">0.00 kW</h3>
-            <p class="subtle">Calculated schedule total</p>
-          </article>
-          <article class="card stat-card">
-            <p class="eyebrow">Y phase</p>
-            <h3 id="yPhaseTotal">0.00 kW</h3>
-            <p class="subtle">Calculated schedule total</p>
-          </article>
-          <article class="card stat-card">
-            <p class="eyebrow">B phase</p>
-            <h3 id="bPhaseTotal">0.00 kW</h3>
-            <p class="subtle">Calculated schedule total</p>
-          </article>
-          <article class="card stat-card wide">
-            <p class="eyebrow">Overall connected load</p>
-            <h3 id="overallTotal">0.00 kW</h3>
-            <p class="subtle">Three-phase total of all added equipment</p>
-          </article>
-        </section>
-
-        <section class="card schedule-card">
-          <div class="section-header wrap">
-            <div>
-              <p class="eyebrow">Load schedule</p>
-              <h2>Sample-format inspired schedule</h2>
-              <p class="subtle">Format adapted from your attached schedule layout, without using project-specific values.</p>
-            </div>
-            <div class="toolbar">
-              <button id="exportCsvButton" class="btn btn-secondary" type="button">Export CSV</button>
-              <button id="clearScheduleButton" class="btn btn-danger" type="button">Clear schedule</button>
-            </div>
-          </div>
-
-          <div class="table-wrap desktop-only">
-            <table class="schedule-table" id="scheduleTable">
-              <thead>
-                <tr>
-                  <th>SL</th>
-                  <th>Equipment</th>
-                  <th>Area</th>
-                  <th>SP/TP</th>
-                  <th>Load</th>
-                  <th>Design A</th>
-                  <th>Breaker</th>
-                  <th>ELCB</th>
-                  <th>Cable</th>
-                  <th>ECC</th>
-                  <th>Isolator</th>
-                  <th>Gland</th>
-                  <th>Lugs</th>
-                  <th>VD %</th>
-                  <th>R kW</th>
-                  <th>Y kW</th>
-                  <th>B kW</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="scheduleBody"></tbody>
-            </table>
-          </div>
-
-          <div id="mobileSchedule" class="mobile-cards mobile-only"></div>
-        </section>
-
-        <section class="card notes-card">
-          <div class="section-header">
-            <div>
-              <p class="eyebrow">Engineering notes</p>
-              <h2>Built around attached references</h2>
-            </div>
-          </div>
-          <ul class="note-list">
-            <li>DEWA Appendix 5 tables are used as the base for cable and breaker sizing logic.</li>
-            <li>ABB enclosed switch-disconnector models are used for automatic isolator recommendations.</li>
-            <li>Attached Oman Cables and Nexans data are used for outer diameter, voltage drop and accessory guidance where available.</li>
-            <li>Fault level, correction factors, special motor starting, ambient derating and final coordination still need engineer review before issue.</li>
-          </ul>
-        </section>
-      </main>
-    </div>
-
-    <dialog id="profileDialog" class="profile-dialog">
-      <form method="dialog" class="profile-dialog-inner">
-        <div class="section-header wrap">
-          <div>
-            <p class="eyebrow">Profile manager</p>
-            <h2>Standard selection profiles</h2>
-            <p class="subtle">Create your own dropdown standards and store them on the device.</p>
-          </div>
-          <button class="btn btn-ghost" value="cancel">Close</button>
+          <label>Distance (m)
+            <input id="distance" type="number" min="0" step="1" placeholder="Example: 35">
+          </label>
         </div>
 
-        <div class="form-grid profile-grid">
-          <label class="stack full-width">
-            <span>Profile name</span>
-            <input id="profileName" type="text" placeholder="e.g. My DEWA Pool Standard" />
-          </label>
-
-          <label class="stack">
-            <span>Preferred cable standard</span>
-            <select id="profileCableStandard"></select>
-          </label>
-
-          <label class="stack">
-            <span>Voltage drop limit %</span>
-            <input id="profileVoltageDrop" type="number" min="0.5" step="0.1" />
-          </label>
-
-          <label class="stack">
-            <span>Breaker changes to MCCB above (A)</span>
-            <input id="profileMccbThreshold" type="number" min="1" step="1" />
-          </label>
-
-          <label class="stack">
-            <span>Default ELCB required</span>
-            <select id="profileRequireElcb">
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
+        <div class="grid two">
+          <label>System
+            <select id="systemType">
+              <option value="3ph">3 Phase</option>
+              <option value="1ph">1 Phase</option>
             </select>
           </label>
-
-          <label class="stack">
-            <span>Default ELCB sensitivity</span>
-            <select id="profileDefaultElcbSensitivity"></select>
-          </label>
-
-          <label class="stack full-width">
-            <span>Breaker sizes (comma separated)</span>
-            <textarea id="profileBreakerSizes" rows="2"></textarea>
-          </label>
-
-          <label class="stack full-width">
-            <span>Earth cable rule</span>
-            <select id="profileEarthRule">
-              <option value="sameUpTo16HalfAbove">Same size up to 16 mm², then next standard at 50%</option>
-              <option value="sameAlways">Same size always</option>
+          <label>Cable Type
+            <select id="cableType">
+              <option value="xlpe">Armoured XLPE Cu</option>
+              <option value="pvc">Armoured PVC Cu</option>
+              <option value="single">Single Core PVC Cu</option>
             </select>
           </label>
         </div>
 
-        <div class="toolbar end">
-          <button id="saveProfileButton" class="btn btn-primary" type="button">Save profile</button>
-          <button id="deleteProfileButton" class="btn btn-danger" type="button">Delete selected</button>
-        </div>
-      </form>
-    </dialog>
+        <button id="calculateBtn" class="primary">Select Materials</button>
+        <p class="small muted">
+          Based on the attached Dubai DEWA cable selection tables and ABB enclosed isolator data. Final selection still needs project checks for voltage drop, fault level, and installation conditions.
+        </p>
+      </section>
 
-    <script type="module" src="./app.js"></script>
-  </body>
+      <section class="card" id="resultCard" hidden>
+        <div class="section-title">Selected Materials</div>
+        <div id="resultContent"></div>
+        <div class="actions">
+          <button id="addBtn" class="secondary">Add to List</button>
+          <button id="clearBtn" class="ghost">Clear</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-title">Equipment List</div>
+        <div id="emptyState" class="empty">No equipment added yet.</div>
+        <div id="itemsList" class="items"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="logic.js"></script>
+  <script src="app.js"></script>
+</body>
 </html>
