@@ -1,221 +1,98 @@
-export const STANDARD_SIZES = [1.5, 2.5, 4, 6, 10, 16, 25, 35, 50, 70, 95, 120, 150, 185, 240, 300, 400];
-
-export const BREAKER_SIZES_DEFAULT = [6, 10, 16, 20, 25, 32, 40, 50, 63, 80, 100, 125, 160, 200, 225, 250, 300, 350, 400];
-
-export const SENSITIVITY_OPTIONS = [30, 100, 300];
-
-export const CABLE_STANDARDS = {
-  singleCorePVC: {
-    key: 'singleCorePVC',
-    label: 'DEWA Single-core PVC in concealed conduit',
-    family: 'single-core',
-    phaseModes: ['1P', '3P'],
-    voltageDropAvailable: false,
-    rows: [
-      { maxCurrent: 15, maxBreaker: 15, size1P: 2.5, size3P: 2.5 },
-      { maxCurrent: 20, maxBreaker: 20, size1P: 4, size3P: 4 },
-      { maxCurrent: 25, maxBreaker: 25, size1P: 6, size3P: 6 },
-      { maxCurrent: 30, maxBreaker: 30, size1P: 6, size3P: 10 },
-      { maxCurrent: 40, maxBreaker: 40, size1P: 10, size3P: 16 },
-      { maxCurrent: 50, maxBreaker: 50, size1P: 16, size3P: 25 },
-      { maxCurrent: 60, maxBreaker: 60, size1P: 25, size3P: 25 },
-      { maxCurrent: 80, maxBreaker: 80, size1P: 35, size3P: 50 },
-      { maxCurrent: 100, maxBreaker: 100, size1P: null, size3P: 70 },
-      { maxCurrent: 125, maxBreaker: 125, size1P: null, size3P: 95 },
-      { maxCurrent: 160, maxBreaker: 160, size1P: null, size3P: 120 },
+window.APP_DATA = {
+  breakerStandards: [6,10,16,20,25,32,40,50,63,80,100,125,160,200,225,250,300,350,400],
+  profiles: {
+    "DEWA Standard": {
+      lugType: "Cu crimp lug",
+      glandFinish: "Brass compression gland",
+      note: "Default profile based on attached standards."
+    },
+    "Project Standard A": {
+      lugType: "Tinned Cu lug",
+      glandFinish: "Nickel plated brass gland",
+      note: "Editable local profile for your own standard."
+    },
+    "Project Standard B": {
+      lugType: "Heavy duty Cu lug",
+      glandFinish: "Double compression gland",
+      note: "Editable local profile for your own standard."
+    }
+  },
+  cableTables: {
+    single: [
+      {maxLoad: 15, cableSize: 2.5, breaker: 15},
+      {maxLoad: 20, cableSize: 4, breaker: 20},
+      {maxLoad: 25, cableSize: 6, breaker: 25},
+      {maxLoad: 30, cableSize: 6, breaker: 30},
+      {maxLoad: 40, cableSize: 10, breaker: 40},
+      {maxLoad: 50, cableSize: 16, breaker: 50},
+      {maxLoad: 60, cableSize: 25, breaker: 60},
+      {maxLoad: 80, cableSize: 35, breaker: 80},
+      {maxLoad: 100, cableSize: 50, breaker: 100},
+      {maxLoad: 125, cableSize: 70, breaker: 125},
+      {maxLoad: 160, cableSize: 95, breaker: 160}
     ],
-  },
-  multicorePVC: {
-    key: 'multicorePVC',
-    label: 'DEWA Multicore PVC / SWA / PVC',
-    family: 'armoured-multicore',
-    phaseModes: ['1P', '3P'],
-    voltageDropAvailable: false,
-    rows: [
-      { maxCurrent: 15, maxBreaker: 15, size: 2.5 },
-      { maxCurrent: 20, maxBreaker: 20, size: 4 },
-      { maxCurrent: 30, maxBreaker: 30, size: 6 },
-      { maxCurrent: 40, maxBreaker: 40, size: 10 },
-      { maxCurrent: 50, maxBreaker: 50, size: 16 },
-      { maxCurrent: 60, maxBreaker: 60, size: 25 },
-      { maxCurrent: 80, maxBreaker: 80, size: 35 },
-      { maxCurrent: 100, maxBreaker: 100, size: 50 },
-      { maxCurrent: 125, maxBreaker: 125, size: 70 },
-      { maxCurrent: 160, maxBreaker: 160, size: 95 },
-      { maxCurrent: 180, maxBreaker: 180, size: 120 },
-      { maxCurrent: 200, maxBreaker: 200, size: 150 },
-      { maxCurrent: 250, maxBreaker: 250, size: 185 },
-      { maxCurrent: 300, maxBreaker: 300, size: 240 },
-      { maxCurrent: 350, maxBreaker: 350, size: 300 },
-      { maxCurrent: 400, maxBreaker: 400, size: 400 },
+    pvc: [
+      {maxLoad: 15, cableSize: 2.5, breaker: 15},
+      {maxLoad: 20, cableSize: 4, breaker: 20},
+      {maxLoad: 30, cableSize: 6, breaker: 30},
+      {maxLoad: 40, cableSize: 10, breaker: 40},
+      {maxLoad: 50, cableSize: 16, breaker: 50},
+      {maxLoad: 60, cableSize: 25, breaker: 60},
+      {maxLoad: 80, cableSize: 35, breaker: 80},
+      {maxLoad: 100, cableSize: 50, breaker: 100},
+      {maxLoad: 125, cableSize: 70, breaker: 125},
+      {maxLoad: 160, cableSize: 95, breaker: 160},
+      {maxLoad: 180, cableSize: 120, breaker: 180},
+      {maxLoad: 200, cableSize: 150, breaker: 200},
+      {maxLoad: 250, cableSize: 185, breaker: 250},
+      {maxLoad: 300, cableSize: 240, breaker: 300},
+      {maxLoad: 350, cableSize: 300, breaker: 350},
+      {maxLoad: 400, cableSize: 400, breaker: 400}
     ],
+    xlpe: [
+      {maxLoad: 50, cableSize: 10, breaker: 50},
+      {maxLoad: 60, cableSize: 16, breaker: 60},
+      {maxLoad: 80, cableSize: 25, breaker: 80},
+      {maxLoad: 100, cableSize: 35, breaker: 100},
+      {maxLoad: 125, cableSize: 50, breaker: 125},
+      {maxLoad: 160, cableSize: 70, breaker: 160},
+      {maxLoad: 200, cableSize: 95, breaker: 200},
+      {maxLoad: 225, cableSize: 120, breaker: 225},
+      {maxLoad: 250, cableSize: 150, breaker: 250},
+      {maxLoad: 300, cableSize: 185, breaker: 300},
+      {maxLoad: 350, cableSize: 240, breaker: 350},
+      {maxLoad: 400, cableSize: 300, breaker: 400}
+    ]
   },
-  multicoreXLPE: {
-    key: 'multicoreXLPE',
-    label: 'DEWA Multicore XLPE / SWA / PVC',
-    family: 'armoured-multicore',
-    phaseModes: ['1P', '3P'],
-    voltageDropAvailable: true,
-    rows: [
-      { maxCurrent: 50, maxBreaker: 50, size: 10 },
-      { maxCurrent: 60, maxBreaker: 60, size: 16 },
-      { maxCurrent: 80, maxBreaker: 80, size: 25 },
-      { maxCurrent: 100, maxBreaker: 100, size: 35 },
-      { maxCurrent: 125, maxBreaker: 125, size: 50 },
-      { maxCurrent: 160, maxBreaker: 160, size: 70 },
-      { maxCurrent: 200, maxBreaker: 200, size: 95 },
-      { maxCurrent: 225, maxBreaker: 225, size: 120 },
-      { maxCurrent: 250, maxBreaker: 250, size: 150 },
-      { maxCurrent: 300, maxBreaker: 300, size: 185 },
-      { maxCurrent: 350, maxBreaker: 350, size: 240 },
-      { maxCurrent: 400, maxBreaker: 400, size: 300 },
-    ],
-  },
-};
-
-export const VOLTAGE_DROP_XLPE_3_4C = {
-  1.5: 26.73,
-  2.5: 16.37,
-  4: 10.19,
-  6: 6.81,
-  10: 4.04,
-  16: 2.55,
-  25: 1.61,
-  35: 1.17,
-  50: 0.866,
-  70: 0.608,
-  95: 0.447,
-  120: 0.363,
-  150: 0.305,
-  185: 0.256,
-  240: 0.212,
-  300: 0.187,
-  400: 0.167,
-};
-
-export const OD_XLPE_ARMOURED = {
-  2: {
-    1.5: 12.5,
-    2.5: 14.0,
-    4: 15.0,
-    6: 16.0,
-    10: 18.0,
-    16: 20.0,
-    25: 20.0,
-    35: 23.0,
-    50: 25.0,
-    70: 28.0,
-    95: 32.0,
-    120: 34.0,
-    150: 38.0,
-    185: 42.0,
-    240: 49.0,
-    300: 53.0,
-    400: 58.0,
-  },
-  3: {
-    1.5: 13.0,
-    2.5: 14.0,
-    4: 15.0,
-    6: 17.0,
-    10: 19.0,
-    16: 21.0,
-    25: 23.0,
-    35: 25.0,
-    50: 28.0,
-    70: 32.0,
-    95: 36.0,
-    120: 40.0,
-    150: 45.0,
-    185: 48.0,
-    240: 54.0,
-    300: 60.0,
-    400: 64.0,
-  },
-  4: {
-    1.5: 14.0,
-    2.5: 15.0,
-    4: 16.0,
-    6: 18.0,
-    10: 21.0,
-    16: 23.0,
-    25: 26.0,
-    35: 29.0,
-    50: 31.0,
-    70: 37.0,
-    95: 40.0,
-    120: 47.0,
-    150: 51.0,
-    185: 56.0,
-    240: 62.0,
-    300: 68.0,
-    400: 78.0,
-  },
-};
-
-export const GLAND_RULES_DEFAULT = [
-  { metric: 'M20', minOd: 6, maxOd: 12 },
-  { metric: 'M25', minOd: 11, maxOd: 17 },
-  { metric: 'M32', minOd: 15, maxOd: 21 },
-  { metric: 'M40', minOd: 19, maxOd: 28 },
-  { metric: 'M50', minOd: 27, maxOd: 35 },
-  { metric: 'M63', minOd: 34, maxOd: 44 },
-  { metric: 'M75', minOd: 43, maxOd: 57 },
-  { metric: 'M90', minOd: 56, maxOd: 72 },
-];
-
-export const ISOLATOR_MODELS = {
-  '1P': [
-    { upto: 25, model: 'ABB KSE225DP', poles: '2P', cableEntry: '2xM25 / 2xM25', note: '25A enclosed isolator' },
-    { upto: 40, model: 'ABB KSE240DP', poles: '2P', cableEntry: '2xM32 / 2xM32 + 1xM16', note: '40A enclosed isolator' },
+  isolators: [
+    {maxCurrent:25, model:"ABB KSE325TPN", poles:"3P+N", glandEntry:"2xM25 / 2xM25", cableRange:"up to 10 mm²"},
+    {maxCurrent:40, model:"ABB KSE340TPN", poles:"3P+N", glandEntry:"2xM32 / 2xM32+M16", cableRange:"up to 25 mm²"},
+    {maxCurrent:63, model:"ABB KSE363TPN", poles:"3P+N", glandEntry:"2xM40 / 2xM40+M16", cableRange:"up to 45 mm² AC-23A"},
+    {maxCurrent:80, model:"ABB KSE380TPN", poles:"3P+N", glandEntry:"2xM40 / 2xM40+M16", cableRange:"up to 58 mm² AC-23A"},
+    {maxCurrent:125, model:"ABB KSE3125TPN", poles:"3P+N", glandEntry:"2xM40 / 2xM40+M16", cableRange:"up to 70 mm² AC-23A"}
   ],
-  '3P': [
-    { upto: 25, model: 'ABB KSE325TPN', poles: '3P+N', cableEntry: '2xM25 / 2xM25', note: '25A side operated' },
-    { upto: 40, model: 'ABB KSE340TPN', poles: '3P+N', cableEntry: '2xM32 / 2xM32 + 1xM16', note: '40A side operated' },
-    { upto: 63, model: 'ABB KSE363TPN', poles: '3P+N', cableEntry: '2xM40 / 2xM40 + 1xM16', note: '63A front operated' },
-    { upto: 80, model: 'ABB KSE380TPN', poles: '3P+N', cableEntry: '2xM40 / 2xM40 + 1xM16', note: '80A front operated' },
-    { upto: 125, model: 'ABB KSE3125TPN', poles: '3P+N', cableEntry: '2xM40 / 2xM40 + 1xM16', note: '125A front operated' },
+  glandMap: [
+    {maxCable:6, gland:"M20 brass gland"},
+    {maxCable:16, gland:"M25 brass gland"},
+    {maxCable:35, gland:"M32 brass gland"},
+    {maxCable:70, gland:"M40 brass gland"},
+    {maxCable:120, gland:"M50 brass gland"},
+    {maxCable:400, gland:"M63 brass gland"}
   ],
-};
-
-export const DEFAULT_PROFILES = {
-  'DEWA Default': {
-    name: 'DEWA Default',
-    preferredCableStandard: 'multicoreXLPE',
-    breakerSizes: BREAKER_SIZES_DEFAULT,
-    voltageDropLimitPercent: 4,
-    mccbThreshold: 63,
-    requireElcb: true,
-    defaultElcbSensitivity: 100,
-    earthRule: 'sameUpTo16HalfAbove',
-    glandRules: GLAND_RULES_DEFAULT,
-  },
-  'Water Feature': {
-    name: 'Water Feature',
-    preferredCableStandard: 'multicoreXLPE',
-    breakerSizes: BREAKER_SIZES_DEFAULT,
-    voltageDropLimitPercent: 4,
-    mccbThreshold: 63,
-    requireElcb: true,
-    defaultElcbSensitivity: 100,
-    earthRule: 'sameUpTo16HalfAbove',
-    glandRules: GLAND_RULES_DEFAULT,
-  },
-  'Lighting / Small Power': {
-    name: 'Lighting / Small Power',
-    preferredCableStandard: 'singleCorePVC',
-    breakerSizes: BREAKER_SIZES_DEFAULT,
-    voltageDropLimitPercent: 3,
-    mccbThreshold: 63,
-    requireElcb: true,
-    defaultElcbSensitivity: 30,
-    earthRule: 'sameUpTo16HalfAbove',
-    glandRules: GLAND_RULES_DEFAULT,
-  },
-};
-
-export const STORAGE_KEYS = {
-  profiles: 'dewa-cable-selector-profiles-v1',
-  schedule: 'dewa-cable-selector-schedule-v1',
-  activeProfile: 'dewa-cable-selector-active-profile-v1',
+  lugMap: [
+    {maxCable:6, lug:"Cu lug 6 mm²"},
+    {maxCable:10, lug:"Cu lug 10 mm²"},
+    {maxCable:16, lug:"Cu lug 16 mm²"},
+    {maxCable:25, lug:"Cu lug 25 mm²"},
+    {maxCable:35, lug:"Cu lug 35 mm²"},
+    {maxCable:50, lug:"Cu lug 50 mm²"},
+    {maxCable:70, lug:"Cu lug 70 mm²"},
+    {maxCable:95, lug:"Cu lug 95 mm²"},
+    {maxCable:120, lug:"Cu lug 120 mm²"},
+    {maxCable:150, lug:"Cu lug 150 mm²"},
+    {maxCable:185, lug:"Cu lug 185 mm²"},
+    {maxCable:240, lug:"Cu lug 240 mm²"},
+    {maxCable:300, lug:"Cu lug 300 mm²"},
+    {maxCable:400, lug:"Cu lug 400 mm²"}
+  ]
 };
