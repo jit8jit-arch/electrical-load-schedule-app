@@ -1,18 +1,18 @@
 {
-  "name": "DEWA Cable & Protection Selector",
-  "short_name": "Cable Select",
-  "start_url": "./index.html",
+  "name": "Electrical Cable Selector",
+  "short_name": "Cable Selector",
+  "start_url": "./",
   "display": "standalone",
-  "background_color": "#081122",
+  "background_color": "#0b1220",
   "theme_color": "#0f172a",
   "icons": [
     {
-      "src": "./assets/icon-192.png",
+      "src": "assets/icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "./assets/icon-512.png",
+      "src": "assets/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
